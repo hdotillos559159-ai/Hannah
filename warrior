@@ -1,0 +1,26 @@
+import javax.swing.JOptionPane;
+
+  class Warrior extends GameCharacter {
+	 public Warrior(String name) {
+		 super(name, 100, 15);
+	 }
+	 
+	 @Override
+	 public int attack() {
+		 JOptionPane.showMessageDialog(null, name + " slashes with Sword!(15 damage)");
+		 return attackDamage;
+	 }
+	 
+	 @Override
+	 public int specialMove() {
+		 JOptionPane.showMessageDialog(null, name + " performs Shield Bash! (20 damage)");
+		 return 20;
+	 }
+
+	@Override
+	public int secretPower() {
+		JOptionPane.showMessageDialog(null, name + " uses Berserk Rage! (30 damage)");
+		return 30;
+	}
+
+}
