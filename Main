@@ -1,0 +1,54 @@
+import javax.swing.JOptionPane;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		String mageName = JOptionPane.showInputDialog("Enter Mage's name: ");
+		String warriorName = JOptionPane.showInputDialog("Enter Warrior's name: ");
+		
+		Mage mage = new Mage(mageName);
+		Warrior warrior = new Warrior(warriorName);
+		
+		JOptionPane.showMessageDialog(null, "Game starts! Both " + mage.getName() + " and " + warrior.getName() + " have 100 HP.");
+		
+		while(mage.isAlive() && warrior.isAlive()) {
+			
+			String mageChoice = JOptionPane.showInputDialog(mage.getName() + "'s turn!\nChoose move:\n1. Fireball\n2. Lightning Bolt\n3. Meteor Storm");
+			int mageDamage = 0;
+			
+			switch(mageChoice) {
+			case "1": mageDamage = mage.attack();break;
+			case "2": mageDamage = mage.specialMove();break;
+			case "3": mageDamage = mage.secretPower();break;
+			default : JOptionPane.showMessageDialog(null,  "Invalid choice, turn skipped!");break;
+			}
+			warrior.takeDamage(mageDamage);
+			
+			if(!warrior.isAlive())break;
+			
+			String warriorChoice = JOptionPane.showInputDialog(warrior.getName() + "'s turn!\n1. Sword Slash\n2. Shield Bash\n3. Berserk Rage");
+			int warriorDamage = 0;
+			
+			switch(warriorChoice) {
+			case "1": warriorDamage = warrior.attack();break;
+			case "2": warriorDamage = warrior.specialMove();break;
+			case "3" : warriorDamage = warrior.secretPower();break;
+			default : JOptionPane.showMessageDialog(null, "Invalid choice, turn skipped");break;
+			}
+			mage.takeDamage(warriorDamage);
+			
+			JOptionPane.showMessageDialog(null, "HP Status:\n" + mage.getName() + ":" + mage.getHp() + "HP\n" + warrior.getName() + ":" + warrior.getHp() + "HP");
+			}
+		
+		if(mage.isAlive()) {
+			JOptionPane.showMessageDialog(null, "🎉" + mage.getName() + " wins the battle!");
+			
+		}else {
+			JOptionPane.showMessageDialog(null, "🎉" + warrior.getName() + " wins the battle!");
+		}
+		
+
+	}
+
+}
